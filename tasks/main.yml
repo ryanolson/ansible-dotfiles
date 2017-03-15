@@ -1,0 +1,30 @@
+---
+- name: clone dotfiles
+  git:
+    repo: git@github.com:ryanolson/dotfiles.git
+    dest: "{{ ansible_env.HOME }}/.dotfiles"
+    update: yes
+    accept_hostkey: yes
+
+- name: link dotfiles
+  file:
+    src:  "{{ ansible_env.HOME }}/.dotfiles/{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.{{ item }}"
+    state: link
+    force: true
+  with_items:
+    - dircolors
+    - tmux.conf
+    - vimrc
+    - bashrc
+    - gitconfig
+
+- name: link macos dotfiles
+  file:
+    src:  "{{ ansible_env.HOME }}/.dotfiles/{{ item }}.macos"
+    dest: "{{ ansible_env.HOME }}/.{{ item }}"
+    state: link
+  with_items:
+    - bash_profile
+    - iterm2_shell_integration.bash
+  when: ansible_os_family == "Darwin"

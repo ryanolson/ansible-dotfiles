@@ -1,0 +1,18 @@
+---
+
+allow_duplicates: no
+
+galaxy_info:
+  author: Ryan Olson
+  description: Ansible role for Dotfiles
+  license: 3-clause BSD license.
+  min_ansible_version: 1.6
+  platforms:
+    - name: Ubuntu
+      versions:
+        - trusty
+        - xenial
+  categories:
+    - system
+
+dependencies: []
